@@ -1,0 +1,82 @@
+From a370b6b495386d03d9370aa64b6e1b358eef3c4e Mon Sep 17 00:00:00 2001
+From: Angaddeep Singh <angxddeep@gmail.com>
+Date: Sat, 29 Aug 2026 16:31:10 +0530
+Subject: [PATCH] spes: Add Updater RRO overlay
+
+Change-Id: Ief13ee6c9cb11594f465a429f5fa293a1f03e4fa
+---
+ device.mk                                         |  1 +
+ overlay/UpdaterOverlaySpes/Android.bp             | 10 ++++++++++
+ overlay/UpdaterOverlaySpes/AndroidManifest.xml    | 13 +++++++++++++
+ overlay/UpdaterOverlaySpes/res/values/strings.xml | 10 ++++++++++
+ 4 files changed, 34 insertions(+)
+ create mode 100644 overlay/UpdaterOverlaySpes/Android.bp
+ create mode 100644 overlay/UpdaterOverlaySpes/AndroidManifest.xml
+ create mode 100644 overlay/UpdaterOverlaySpes/res/values/strings.xml
+
+diff --git a/device.mk b/device.mk
+index ae5d206..7ab58a3 100644
+--- a/device.mk
++++ b/device.mk
+@@ -333,6 +333,7 @@ PRODUCT_PACKAGES += \
+     SpesSystemUIOverlay \
+     SpesTelephonyOverlay \
+     SpesWifiOverlay \
++    UpdaterOverlaySpes \
+     NcmTetheringOverlay
+ 
+ # Partitions
+diff --git a/overlay/UpdaterOverlaySpes/Android.bp b/overlay/UpdaterOverlaySpes/Android.bp
+new file mode 100644
+index 0000000..c4b0171
+--- /dev/null
++++ b/overlay/UpdaterOverlaySpes/Android.bp
+@@ -0,0 +1,10 @@
++//
++// Copyright (C) 2026 The LineageOS Project
++//
++// SPDX-License-Identifier: Apache-2.0
++//
++
++runtime_resource_overlay {
++    name: "UpdaterOverlaySpes",
++    product_specific: true,
++}
+diff --git a/overlay/UpdaterOverlaySpes/AndroidManifest.xml b/overlay/UpdaterOverlaySpes/AndroidManifest.xml
+new file mode 100644
+index 0000000..ee2ce41
+--- /dev/null
++++ b/overlay/UpdaterOverlaySpes/AndroidManifest.xml
+@@ -0,0 +1,13 @@
++<?xml version="1.0" encoding="utf-8"?>
++<!--
++     Copyright (C) 2026 The LineageOS Project
++     SPDX-License-Identifier: Apache-2.0
++-->
++<manifest xmlns:android="http://schemas.android.com/apk/res/android"
++    package="org.lineageos.updater.overlay.spes">
++
++    <overlay
++        android:targetPackage="org.lineageos.updater"
++        android:isStatic="true"
++        android:priority="1" />
++</manifest>
+diff --git a/overlay/UpdaterOverlaySpes/res/values/strings.xml b/overlay/UpdaterOverlaySpes/res/values/strings.xml
+new file mode 100644
+index 0000000..4b4ef88
+--- /dev/null
++++ b/overlay/UpdaterOverlaySpes/res/values/strings.xml
+@@ -0,0 +1,10 @@
++<?xml version="1.0" encoding="utf-8"?>
++<!--
++     Copyright (C) 2026 The LineageOS Project
++     SPDX-License-Identifier: Apache-2.0
++-->
++<resources>
++    <string name="updater_server_url" translatable="false">https://raw.githubusercontent.com/xiaomi-spes-devs/OTA/refs/heads/main/spes.json</string>
++    <string name="report_issue_url" translatable="false">https://github.com/xiaomi-spes-devs/OTA/issues</string>
++    <string name="menu_changelog_url" translatable="false">https://github.com/xiaomi-spes-devs/OTA/releases</string>
++</resources>
+-- 
+2.55.0
+
